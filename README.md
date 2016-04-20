@@ -1,5 +1,5 @@
 # ISAC
-Repository with python wrapper for running ISAC (Iterative stable alignment and classification) for analyzing of cryo-electron microscopy data
+Repository with python wrapper for running ISAC (Iterative stable alignment and clustering) for analyzing single particle cryo-electron microscopy data.
 
 ## Dependencies
 This program will run sxisac.py over a cluster using MPI. Therefore, you will need: 
@@ -29,7 +29,7 @@ Generally, users should not run computational tasks on cluster head nodes. There
 
 For us, we use the [Triton Shared Computing Cluster] (http://www.sdsc.edu/support/user_guides/tscc-quick-start.html) at UCSD where we can start an interactive node with a single cpu: 
 
-<pre> </pre>
+<pre>$ qsub -I -l nodes=1:ppn=1 -l walltime=3:50:00</pre>
 
 After on this node, we will run the ISAC.py command. When this command finishes, we log OUT of the interactive node and then submit the job: 
 
@@ -43,7 +43,7 @@ Depending on your cluster setup, you will need to edit the queue names and clust
 
 Commadn line options:
 <pre>$ ./ISAC.py 
-Usage: ISAC.py -i <stack>  --lp=<lp> --hp=<hp> 
+Usage: ISAC.py -i <stack> --nodes=<nodes> --threads=<threads>
 
 Options:
   -h, --help      show this help message and exit
