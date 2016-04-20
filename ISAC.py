@@ -13,7 +13,7 @@ import time
 #=========================
 def setupParserOptions():
         parser = optparse.OptionParser()
-        parser.set_usage("%prog -i <stack>  --lp=<lp> --hp=<hp> ")
+        parser.set_usage("%prog -i <stack> --nodes=<nodes> --threads=<threads>")
         parser.add_option("-i",dest="stack",type="string",metavar="FILE",
                 help="Input stack")
         #parser.add_option("--apix",dest="apix",type="float", metavar="FLOAT",
