@@ -1,6 +1,12 @@
 # ISAC
 Repository with python wrapper for running ISAC (Iterative stable alignment and clustering) for analyzing single particle cryo-electron microscopy data.
 
+More information can be found in the published manuscript: 
+
+>[Iterative stable alignment and clustering of 2D transmission electron microscope images] (http://www.ncbi.nlm.nih.gov/pubmed/22325773)
+>Yang Z, Fang J, Chittuluru J, Asturias FJ, Penczek PA.
+>Structure. 2012 Feb 8;20(2):237-47.
+
 ## Dependencies
 This program will run sxisac.py over a cluster using MPI. Therefore, you will need: 
 
