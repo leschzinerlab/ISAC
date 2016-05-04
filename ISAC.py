@@ -22,8 +22,8 @@ def setupParserOptions():
         #        help="Low pass filter to use during alignment. (Default=15 A)")
 	#parser.add_option("--hp",dest="hp",type="int", metavar="INT",default=500,
         #        help="High pass filter to use during alignment. (Default=500 A)")
-	parser.add_option("--queue",dest="queue",type="string", metavar="STRING",default='hotel',
-                help="Queue for job submission. (Default=hotel)")
+	parser.add_option("--queue",dest="queue",type="string", metavar="STRING",default='condo',
+                help="Queue for job submission. (Default=condo)")
 	parser.add_option("--nodes",dest="nodes",type="int", metavar="INT",default=20,
                 help="Number of nodes to distribute job over. (Default=20)")
 	parser.add_option("--threads",dest="threads",type="int", metavar="INT",default=8,
