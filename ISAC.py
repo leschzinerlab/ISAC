@@ -22,14 +22,22 @@ def setupParserOptions():
         #        help="Low pass filter to use during alignment. (Default=15 A)")
 	#parser.add_option("--hp",dest="hp",type="int", metavar="INT",default=500,
         #        help="High pass filter to use during alignment. (Default=500 A)")
+	parser.add_option("--img_per_grp",dest="img_per_grp",type="int", metavar="INT",default=60,
+                help="Number of images per group. (Default=60)")
+	parser.add_option("--thld_err",dest="thld_err",type="int", metavar="INT",default=60,
+                help="Threshold pixel error when checking stability. (Default=1.75)")
+	parser.add_option("--max_round",dest="maxround",type="int", metavar="INT",default=5,
+                help="Max iterations for alignment. (Default=5)")
+	parser.add_option("--generations",dest="num_gen",type="int", metavar="INT",default=1,
+                help="Number of generations. (Default=1)")
 	parser.add_option("--queue",dest="queue",type="string", metavar="STRING",default='condo',
                 help="Queue for job submission. (Default=condo)")
 	parser.add_option("--nodes",dest="nodes",type="int", metavar="INT",default=20,
                 help="Number of nodes to distribute job over. (Default=20)")
 	parser.add_option("--threads",dest="threads",type="int", metavar="INT",default=8,
                 help="Number of threads per node to run. (Default=8)")
-	parser.add_option("--walltime",dest="walltime",type="int", metavar="INT",default=6,
-                help="Walltime for job (estimated run time, in hours). (Default=6)")
+	parser.add_option("--walltime",dest="walltime",type="int", metavar="INT",default=8,
+                help="Walltime for job (estimated run time, in hours). (Default=8)")
 	parser.add_option("-d", action="store_true",dest="debug",default=False,
                 help="debug")
         options,args = parser.parse_args()
@@ -109,7 +117,7 @@ def getBoxSize(stack):
 	return boxsize
 
 #=============================
-def submitISAC(bdbstack,queue,nodes,threads,walltime):
+def submitISAC(bdbstack,queue,nodes,threads,walltime,ngen,maxround,imgpergroup,therr):
 
 	subscript='isac_%i.submit'%(int(time.time()))	
 	o1=open(subscript,'w')
@@ -131,7 +139,7 @@ def submitISAC(bdbstack,queue,nodes,threads,walltime):
 	cmd+='### Switch to the working directory;\n'
 	cmd+='cd $PBS_O_WORKDIR\n'
 	cmd+='### Run:\n'
-	cmd+='mpirun  /home/micianfrocco/software/EMAN2-2.12/bin/sxisac.py %s --stab_ali=2 --init_iter=1 --main_iter=1 --match_second=1 --radius=30 --max_round=5 --img_per_grp=60 --thld_err=1.75 --n_generations=1\n' %(bdbstack)
+	cmd+='mpirun  /home/micianfrocco/software/EMAN2-2.12/bin/sxisac.py %s --stab_ali=2 --init_iter=1 --main_iter=1 --match_second=1 --radius=30 --max_round=%i --img_per_grp=%i --thld_err=%f --n_generations=%i\n' %(bdbstack,maxround,imgpergroup,therr,ngen)
 	
 	o1.write(cmd)
 
@@ -193,5 +201,5 @@ if __name__ == "__main__":
         subprocess.Popen(cmd,shell=True).wait()
 
 	#Create cluster submission script & submit job
-	submitISAC('%s_ali' %(bdbstack),params['queue'],params['nodes'],params['threads'],params['walltime'])
+	submitISAC('%s_ali' %(bdbstack),params['queue'],params['nodes'],params['threads'],params['walltime'],params['num_gen'],params['maxround'],params['img_per_grp'],params['thld_err'])
 
