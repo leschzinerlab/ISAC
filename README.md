@@ -47,16 +47,15 @@ Generally, this script is meant to only require the particle stack in Imagic for
 
 Depending on your cluster setup, you will need to edit the queue names and cluster submission template within this python script. Contact us if you need help editing this. 
 
-Commadn line options:
+Command line options:
 <pre>$ ./ISAC.py 
-Usage: ISAC.py -i <stack> --nodes=<nodes> --threads=<threads>
+Usage: ISAC.py -i [stack] 
 
 Options:
   -h, --help      show this help message and exit
   -i FILE         Input stack
   --img_per_grp=INT  Number of images per group. (Default=60)
-  --thld_err=INT     Threshold pixel error when checking stability.
-                     (Default=1.75)
+  --thld_err=INT     Threshold pixel error when checking stability. (Default=1.75)
   --max_round=INT    Max iterations for alignment. (Default=5)
   --generations=INT  Number of generations. (Default=1)
   --queue=STRING  Queue for job submission. (Default=hotel)
@@ -64,3 +63,5 @@ Options:
   --threads=INT   Number of threads per node to run. (Default=8)
   --walltime=INT  Walltime for job (estimated run time, in hours). (Default=6)
   -d              debug</pre>
+
+Each of these input options have default values that work well, and you can read more about them on the ISAC website.
