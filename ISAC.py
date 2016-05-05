@@ -145,7 +145,7 @@ def submitISAC(bdbstack,queue,nodes,threads,walltime,ngen,maxround,imgpergroup,t
 
 	print '\n...Submission script generated.\n'
 
-	print '\n Submit ISAC using the following command: \n'
+	print '\n Exit interactive node and submit ISAC job using the following command: \n'
 
 	print '\n qsub %s' %(subscript)
 	
